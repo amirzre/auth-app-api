@@ -159,6 +159,7 @@ REST_FRAMEWORK = {
     # 'EXCEPTION_HANDLER': 'authapp.api.exception_handlers.proposed_exception_handler',
     "DEFAULT_FILTER_BACKENDS": ("django_filters.rest_framework.DjangoFilterBackend",),
     "DEFAULT_AUTHENTICATION_CLASSES": [],
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
 APP_DOMAIN = env("APP_DOMAIN", default="http://localhost:8000")
