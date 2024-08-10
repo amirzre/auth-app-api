@@ -135,7 +135,7 @@ class LoginApiView(APIView):
             return Response({"error": "phone number or password are incorrect."}, status=status.HTTP_401_UNAUTHORIZED)
 
         return Response({"message": "success"}, status=status.HTTP_200_OK)
-    
+
 
 class ProfileApiView(APIView):
     class OutputProfileSerializer(serializers.ModelSerializer):
