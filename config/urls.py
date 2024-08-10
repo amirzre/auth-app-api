@@ -17,7 +17,7 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 from drf_spectacular.views import (
     SpectacularAPIView,
     SpectacularRedocView,
@@ -29,7 +29,7 @@ urlpatterns = [
     path("schema/", SpectacularAPIView.as_view(api_version="v1"), name="schema"),
     path("redoc/", SpectacularRedocView.as_view(url_name="schema"), name="redoc"),
     path("admin/", admin.site.urls),
-    # path("api/", include(("authapp.api.urls", "api"))),
+    path("api/", include(("authapp.api.urls", "api"))),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 from config.settings.debug_toolbar.setup import DebugToolbarSetup  # noqa

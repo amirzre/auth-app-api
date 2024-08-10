@@ -35,17 +35,3 @@ def validate_otp(phone: str, entered_otp: str) -> bool:
         cache.delete(f"otp:{phone}")
         return True
     return False
-
-
-def send_otp(phone: str) -> str:
-    """
-    Send OTP code to phone number.
-    """
-    otp_code = generate_otp()
-
-    store_otp(phone=phone, otp_code=otp_code, ttl=120)
-
-    # Simulate sending the OTP via SMS
-    print(f"OTP code for {phone} is {otp_code}.")
-
-    return otp_code
