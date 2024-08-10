@@ -30,6 +30,7 @@ THIRD_PARTY_APPS = [
     "django_extensions",
     "drf_spectacular",
     "drf_spectacular_sidecar",
+    "rest_framework_simplejwt",
 ]
 
 INSTALLED_APPS = [
@@ -156,9 +157,8 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 REST_FRAMEWORK = {
     "EXCEPTION_HANDLER": "authapp.api.exception_handlers.drf_default_with_modifications_exception_handler",
-    # 'EXCEPTION_HANDLER': 'authapp.api.exception_handlers.proposed_exception_handler',
     "DEFAULT_FILTER_BACKENDS": ("django_filters.rest_framework.DjangoFilterBackend",),
-    "DEFAULT_AUTHENTICATION_CLASSES": [],
+    "DEFAULT_AUTHENTICATION_CLASSES": ("rest_framework_simplejwt.authentication.JWTAuthentication",),
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
@@ -168,6 +168,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 from config.settings.cors import *  # noqa
 from config.settings.swagger import *  # noqa
+from config.settings.jwt import *  # noqa
 
 from config.settings.debug_toolbar.settings import *  # noqa
 from config.settings.debug_toolbar.setup import DebugToolbarSetup  # noqa
