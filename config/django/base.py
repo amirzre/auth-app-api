@@ -102,6 +102,18 @@ if os.environ.get("GITHUB_WORKFLOW"):
     }
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
+# Cache
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": os.environ.get("REDIS_LOCATION", default="redis://localhost:6379/1"),
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        },
+    }
+}
+
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
@@ -147,6 +159,7 @@ REST_FRAMEWORK = {
     # 'EXCEPTION_HANDLER': 'authapp.api.exception_handlers.proposed_exception_handler',
     "DEFAULT_FILTER_BACKENDS": ("django_filters.rest_framework.DjangoFilterBackend",),
     "DEFAULT_AUTHENTICATION_CLASSES": [],
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
 APP_DOMAIN = env("APP_DOMAIN", default="http://localhost:8000")
