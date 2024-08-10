@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.contrib.auth.models import BaseUserManager as BUM
 from django.db import models
@@ -56,8 +57,23 @@ class BaseUser(BaseModel, AbstractBaseUser, PermissionsMixin):
 
     USERNAME_FIELD = "phone"
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.phone
 
-    def is_staff(self):
+    def is_staff(self) -> bool:
         return self.is_admin
+
+
+class UserProfile(BaseModel):
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="profile",
+        verbose_name=_("user profile"),
+    )
+    first_name = models.CharField(max_length=50, verbose_name=_("first name"))
+    last_name = models.CharField(max_length=50, verbose_name=_("last name"))
+    email = models.EmailField(unique=True, max_length=255, verbose_name=_("email"))
+
+    def __str__(self) -> str:
+        return f"{self.first_name} {self.last_name}"
