@@ -7,7 +7,7 @@ from rest_framework.views import APIView
 
 from authapp.users.models import BaseUser, UserProfile
 from authapp.users.selectors import get_profile
-from authapp.users.services import login_user, register_user, send_otp_code
+from authapp.users.services import register_user, send_otp_code
 from authapp.users.validators import (
     email_validator,
     letter_validator,
@@ -108,33 +108,6 @@ class RegisterApiView(APIView):
 
         output_serializer = self.OutputRegistrSerializer(user)
         return Response(data=output_serializer.data, status=status.HTTP_201_CREATED)
-
-
-class LoginApiView(APIView):
-    class InputLoginSerializer(serializers.Serializer):
-        phone = serializers.CharField(
-            required=True,
-            validators=[
-                MinLengthValidator(limit_value=11),
-                phone_validator,
-            ],
-        )
-        password = serializers.CharField(required=True)
-
-    @extend_schema(request=InputLoginSerializer)
-    def post(self, request, *args, **kwargs):
-        serializer = self.InputLoginSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-
-        try:
-            user = login_user(
-                phone=serializer.validated_data.get("phone"),
-                password=serializer.validated_data.get("password"),
-            )
-        except ValidationError:
-            return Response({"error": "phone number or password are incorrect."}, status=status.HTTP_401_UNAUTHORIZED)
-
-        return Response({"message": "success"}, status=status.HTTP_200_OK)
 
 
 class ProfileApiView(APIView):
