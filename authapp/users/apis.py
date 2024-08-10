@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from authapp.users.models import BaseUser, UserProfile
+from authapp.users.selectors import get_profile
 from authapp.users.services import login_user, register_user, send_otp_code
 from authapp.users.validators import (
     email_validator,
@@ -134,3 +135,18 @@ class LoginApiView(APIView):
             return Response({"error": "phone number or password are incorrect."}, status=status.HTTP_401_UNAUTHORIZED)
 
         return Response({"message": "success"}, status=status.HTTP_200_OK)
+    
+
+class ProfileApiView(APIView):
+    class OutputProfileSerializer(serializers.ModelSerializer):
+        class Meta:
+            model = UserProfile
+            fields = ("first_name", "last_name", "email")
+
+    @extend_schema(responses=OutputProfileSerializer)
+    def get(self, request, *args, **kwargs):
+        profile = get_profile(user=request.user)
+        return Response(
+            self.OutputProfileSerializer(profile, context={"request": request}, many=True).data,
+            status=status.HTTP_200_OK,
+        )
