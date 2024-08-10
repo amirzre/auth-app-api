@@ -8,6 +8,13 @@ from authapp.utils.otp import generate_otp, store_otp, validate_otp
 logger = logging.getLogger(__name__)
 
 
+def login_user(*, phone: str, password: str) -> BaseUser:
+    user = BaseUser.objects.filter(phone=phone).first()
+    if not user or not user.check_password(password):
+        raise ValidationError("Invalid credentials.")
+    return user
+
+
 def register_user(
     *,
     phone: str,
