@@ -81,7 +81,7 @@ class TestServices:
 
         otp_code = "268675"
         mock_generate_otp.return_value = otp_code
-        mock_store_otp.return_value = True  
+        mock_store_otp.return_value = True
 
         returned_otp_code = send_otp_code(phone=phone)
 
