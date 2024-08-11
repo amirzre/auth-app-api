@@ -1,27 +1,16 @@
 from rest_framework.throttling import SimpleRateThrottle
 
 
-class OTPRateThrottle(SimpleRateThrottle):
-    """
-    Throttle class to limit OTP requests.
-    """
-
-    scope = "otp"
-
-    def get_cache_key(self, request, view):
-        phone = request.data.get("phone")
-        if not phone:
-            return None
-        return phone
-
-
 class CustomThrottle(SimpleRateThrottle):
     """
-    Throttle class to limit register requests.
+    Throttle class to limit requests.
     """
 
     def __init__(self, scope=None):
         self.scope = scope or "default"
+        self.history = []
+        self.key = None
+        self.now = None
         super().__init__()
 
     def get_cache_key(self, request, view):
@@ -78,6 +67,11 @@ class CustomThrottle(SimpleRateThrottle):
         self.cache.set(cache_key, self.history, self.duration)
 
         return False
+
+
+class OTPRateThrottle(CustomThrottle):
+    def __init__(self):
+        super().__init__(scope="otp")
 
 
 class RegisterThrottle(CustomThrottle):
