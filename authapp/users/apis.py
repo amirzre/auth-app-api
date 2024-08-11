@@ -9,6 +9,7 @@ from authapp.api.mixins import ApiAuthMixin
 from authapp.users.models import BaseUser, UserProfile
 from authapp.users.selectors import get_profile
 from authapp.users.services import register_user, send_otp_code
+from authapp.users.throttles import OTPRateThrottle, RegisterThrottle
 from authapp.users.validators import (
     email_validator,
     letter_validator,
@@ -19,6 +20,12 @@ from authapp.users.validators import (
 
 
 class SendOtpApiView(APIView):
+    """
+    API view to handle sending OTP codes.
+    """
+
+    throttle_classes = [OTPRateThrottle]
+
     class InputOtpSerializer(serializers.Serializer):
         phone = serializers.CharField(
             required=True,
@@ -49,6 +56,12 @@ class SendOtpApiView(APIView):
 
 
 class RegisterApiView(APIView):
+    """
+    API view to handle user registration.
+    """
+
+    throttle_classes = [RegisterThrottle]
+
     class InputRegistrSerializer(serializers.Serializer):
         phone = serializers.CharField(
             required=True,
@@ -112,6 +125,10 @@ class RegisterApiView(APIView):
 
 
 class ProfileApiView(ApiAuthMixin, APIView):
+    """
+    API view to retrieve user profile information.
+    """
+
     class OutputProfileSerializer(serializers.ModelSerializer):
         class Meta:
             model = UserProfile
