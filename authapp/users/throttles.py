@@ -1,4 +1,3 @@
-from rest_framework.exceptions import Throttled
 from rest_framework.throttling import SimpleRateThrottle
 
 
