@@ -33,6 +33,6 @@ def special_char_validator(password: str):
 
 
 def email_validator(email: str):
-    regex = re.compile(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")
+    regex = re.compile(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$")
     if regex.search(email) is None:
         raise ApplicationError(message=_("Email is invalid."))
