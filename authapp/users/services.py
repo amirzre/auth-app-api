@@ -1,8 +1,8 @@
 import logging
 
-from django.core.exceptions import ValidationError
 from django.db import transaction
 
+from authapp.core.exceptions import ApplicationError
 from authapp.users.models import BaseUser, UserProfile
 from authapp.utils.otp import generate_otp, store_otp, validate_otp
 
@@ -28,10 +28,10 @@ def register_user(
     password=None,
 ) -> BaseUser:
     if not validate_otp(phone=phone, entered_otp=otp_code):
-        raise ValidationError("Invalid phone or expired OTP code.")
+        raise ApplicationError(message="Invalid phone or expired OTP code.")
 
     if BaseUser.objects.filter(phone=phone).exists():
-        raise ValidationError("User already registered.")
+        raise ApplicationError(message="User already registered.")
 
     user = create_user(phone=phone, password=password)
 
@@ -42,7 +42,6 @@ def register_user(
         email=email,
     )
 
-    user.phone_verified = True
     user.save()
 
     return user

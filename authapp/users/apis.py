@@ -1,5 +1,4 @@
-from django.core.exceptions import ValidationError
-from django.core.validators import MinLengthValidator
+from django.core.validators import MaxLengthValidator, MinLengthValidator
 from drf_spectacular.utils import extend_schema
 from rest_framework import serializers, status
 from rest_framework.response import Response
@@ -30,6 +29,7 @@ class SendOtpApiView(APIView):
         phone = serializers.CharField(
             required=True,
             validators=[
+                MaxLengthValidator(limit_value=11),
                 MinLengthValidator(limit_value=11),
                 phone_validator,
             ],
@@ -43,13 +43,7 @@ class SendOtpApiView(APIView):
         serializer = self.InputOtpSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        try:
-            otp_code = send_otp_code(phone=serializer.validated_data.get("phone"))
-        except ValidationError:
-            return Response(
-                data={{"error": serializer.errors}},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
+        otp_code = send_otp_code(phone=serializer.validated_data.get("phone"))
 
         output_serializer = self.OutputOtpSerializer({"otp_code": otp_code})
         return Response(data=output_serializer.data, status=status.HTTP_200_OK)
@@ -66,6 +60,7 @@ class RegisterApiView(APIView):
         phone = serializers.CharField(
             required=True,
             validators=[
+                MaxLengthValidator(limit_value=11),
                 MinLengthValidator(limit_value=11),
                 phone_validator,
             ],
@@ -108,17 +103,14 @@ class RegisterApiView(APIView):
         serializer = self.InputRegistrSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        try:
-            user = register_user(
-                phone=serializer.validated_data.get("phone"),
-                first_name=serializer.validated_data.get("first_name"),
-                last_name=serializer.validated_data.get("last_name"),
-                email=serializer.validated_data.get("email"),
-                otp_code=serializer.validated_data.get("otp_code"),
-                password=serializer.validated_data.get("password"),
-            )
-        except ValidationError as ex:
-            return Response({"error": str(ex)}, status=status.HTTP_400_BAD_REQUEST)
+        user = register_user(
+            phone=serializer.validated_data.get("phone"),
+            first_name=serializer.validated_data.get("first_name"),
+            last_name=serializer.validated_data.get("last_name"),
+            email=serializer.validated_data.get("email"),
+            otp_code=serializer.validated_data.get("otp_code"),
+            password=serializer.validated_data.get("password"),
+        )
 
         output_serializer = self.OutputRegistrSerializer(user)
         return Response(data=output_serializer.data, status=status.HTTP_201_CREATED)
