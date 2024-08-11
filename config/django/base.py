@@ -163,8 +163,8 @@ REST_FRAMEWORK = {
     "DEFAULT_THROTTLE_RATES": {
         "otp": "3/hour",
         "register": "3/hour",
-        "login": "3/min",
-    }
+        "login": "3/hour",
+    },
 }
 
 APP_DOMAIN = env("APP_DOMAIN", default="http://localhost:8000")
