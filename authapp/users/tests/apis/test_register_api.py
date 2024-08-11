@@ -31,9 +31,6 @@ def existing_user(db):
 @pytest.mark.django_db
 class TestRegisterApiView:
     def test_register_user_success(self, api_client, register_url):
-        """
-        Test that a user can register successfully with valid data.
-        """
         phone_number = "09876543210"
         otp_code = "123456"
 
@@ -53,9 +50,6 @@ class TestRegisterApiView:
         assert BaseUser.objects.filter(phone=phone_number).exists()
 
     def test_register_user_invalid_otp(self, api_client, register_url):
-        """
-        Test that registration fails with an invalid or expired OTP code.
-        """
         data = {
             "phone": "09876543210",
             "password": "Strong@1234",
@@ -69,9 +63,6 @@ class TestRegisterApiView:
         assert response.status_code == status.HTTP_400_BAD_REQUEST
 
     def test_register_user_existing_phone(self, api_client, register_url, existing_user):
-        """
-        Test that registration fails if the phone number is already registered.
-        """
         data = {
             "phone": existing_user.phone,
             "password": "Strong@1234",
@@ -85,9 +76,6 @@ class TestRegisterApiView:
         assert response.status_code == status.HTTP_400_BAD_REQUEST
 
     def test_register_user_existing_email(self, api_client, register_url, existing_user):
-        """
-        Test that registration fails if the email is already registered.
-        """
         UserProfile.objects.create(
             user=existing_user, first_name="user", last_name="test", email="user.test@example.com"
         )
@@ -106,9 +94,6 @@ class TestRegisterApiView:
         assert "Email already exists." in str(response.data)
 
     def test_register_user_throttle_limit(self, api_client, register_url):
-        """
-        Test that the registration endpoint is throttled after the limit is exceeded.
-        """
         phone_number = "09876543210"
 
         data = {
