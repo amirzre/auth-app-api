@@ -27,7 +27,5 @@ else:
 
 
 class ApiAuthMixin:
-    authentication_classes: Sequence[Type[BaseAuthentication]] = [
-        JWTAuthentication
-    ]
+    authentication_classes: Sequence[Type[BaseAuthentication]] = [JWTAuthentication]
     permission_classes: PermissionClassesType = (IsAuthenticated,)

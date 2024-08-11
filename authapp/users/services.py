@@ -14,9 +14,8 @@ def create_user(*, phone: str, password: str) -> BaseUser:
 
 
 def create_profile(*, user: BaseUser, first_name: str, last_name: str, email: str) -> UserProfile:
-    return UserProfile.objects.create(
-        user=user, first_name=first_name, last_name=last_name, email=email
-    )
+    return UserProfile.objects.create(user=user, first_name=first_name, last_name=last_name, email=email)
+
 
 @transaction.atomic
 def register_user(
