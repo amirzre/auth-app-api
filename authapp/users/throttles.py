@@ -17,11 +17,14 @@ class OTPRateThrottle(SimpleRateThrottle):
 
 class CustomThrottle(SimpleRateThrottle):
     """
-    Throttle class to limit register requests.
+    Throttle class to limit requests.
     """
 
     def __init__(self, scope=None):
         self.scope = scope or "default"
+        self.history = []
+        self.key = None
+        self.now = None
         super().__init__()
 
     def get_cache_key(self, request, view):
