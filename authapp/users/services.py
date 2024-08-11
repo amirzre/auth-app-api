@@ -1,6 +1,7 @@
 import logging
 
 from django.core.exceptions import ValidationError
+from django.db import transaction
 
 from authapp.users.models import BaseUser, UserProfile
 from authapp.utils.otp import generate_otp, store_otp, validate_otp
@@ -8,13 +9,15 @@ from authapp.utils.otp import generate_otp, store_otp, validate_otp
 logger = logging.getLogger(__name__)
 
 
-def login_user(*, phone: str, password: str) -> BaseUser:
-    user = BaseUser.objects.filter(phone=phone).first()
-    if not user or not user.check_password(password):
-        raise ValidationError("Invalid credentials.")
-    return user
+def create_user(*, phone: str, password: str) -> BaseUser:
+    return BaseUser.objects.create_user(phone=phone, password=password)
 
 
+def create_profile(*, user: BaseUser, first_name: str, last_name: str, email: str) -> UserProfile:
+    return UserProfile.objects.create(user=user, first_name=first_name, last_name=last_name, email=email)
+
+
+@transaction.atomic
 def register_user(
     *,
     phone: str,
@@ -25,14 +28,14 @@ def register_user(
     password=None,
 ) -> BaseUser:
     if not validate_otp(phone=phone, entered_otp=otp_code):
-        raise ValidationError("Invalid or expired OTP code.")
+        raise ValidationError("Invalid phone or expired OTP code.")
 
     if BaseUser.objects.filter(phone=phone).exists():
         raise ValidationError("User already registered.")
 
-    user = BaseUser.objects.create_user(phone=phone, password=password)
+    user = create_user(phone=phone, password=password)
 
-    UserProfile.objects.create(
+    create_profile(
         user=user,
         first_name=first_name,
         last_name=last_name,

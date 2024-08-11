@@ -5,9 +5,10 @@ from rest_framework import serializers, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from authapp.api.mixins import ApiAuthMixin
 from authapp.users.models import BaseUser, UserProfile
 from authapp.users.selectors import get_profile
-from authapp.users.services import login_user, register_user, send_otp_code
+from authapp.users.services import register_user, send_otp_code
 from authapp.users.validators import (
     email_validator,
     letter_validator,
@@ -110,34 +111,7 @@ class RegisterApiView(APIView):
         return Response(data=output_serializer.data, status=status.HTTP_201_CREATED)
 
 
-class LoginApiView(APIView):
-    class InputLoginSerializer(serializers.Serializer):
-        phone = serializers.CharField(
-            required=True,
-            validators=[
-                MinLengthValidator(limit_value=11),
-                phone_validator,
-            ],
-        )
-        password = serializers.CharField(required=True)
-
-    @extend_schema(request=InputLoginSerializer)
-    def post(self, request, *args, **kwargs):
-        serializer = self.InputLoginSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-
-        try:
-            user = login_user(
-                phone=serializer.validated_data.get("phone"),
-                password=serializer.validated_data.get("password"),
-            )
-        except ValidationError:
-            return Response({"error": "phone number or password are incorrect."}, status=status.HTTP_401_UNAUTHORIZED)
-
-        return Response({"message": "success"}, status=status.HTTP_200_OK)
-
-
-class ProfileApiView(APIView):
+class ProfileApiView(ApiAuthMixin, APIView):
     class OutputProfileSerializer(serializers.ModelSerializer):
         class Meta:
             model = UserProfile
@@ -147,6 +121,6 @@ class ProfileApiView(APIView):
     def get(self, request, *args, **kwargs):
         profile = get_profile(user=request.user)
         return Response(
-            self.OutputProfileSerializer(profile, context={"request": request}, many=True).data,
+            self.OutputProfileSerializer(profile, context={"request": request}).data,
             status=status.HTTP_200_OK,
         )
