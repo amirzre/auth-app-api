@@ -1,0 +1,1218 @@
+{
+	"info": {
+		"_postman_id": "bc9f717e-3a20-4ee8-8a18-b34a2cd3a12f",
+		"name": "auth-app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27982450"
+	},
+	"item": [
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"phone\": \"09123456789\",\n  \"password\": \"test@123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local_url}}/api/auth/jwt/login/",
+					"host": [
+						"{{local_url}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"jwt",
+						"login",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "login-success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"phone\": \"09123456789\",\n  \"password\": \"test@123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local_url}}/api/auth/jwt/login/",
+							"host": [
+								"{{local_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"jwt",
+								"login",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "JSON",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 12 Aug 2024 04:33:57 GMT",
+							"type": "text"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.2",
+							"type": "text"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"type": "text"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, origin",
+							"type": "text"
+						},
+						{
+							"key": "Allow",
+							"value": "POST, OPTIONS",
+							"type": "text"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY",
+							"type": "text"
+						},
+						{
+							"key": "Content-Length",
+							"value": "483",
+							"type": "text"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff",
+							"type": "text"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin",
+							"type": "text"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"refresh\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcyMzUyMzYzNywiaWF0IjoxNzIzNDM3MjM3LCJqdGkiOiI0NmMwNmM4YjkwNzk0NTc3OTFkYjU1YzZmYzQzOWJjMSIsInVzZXJfaWQiOjh9.7QLIe3Y_wT1vh7xTKFZZ1sInQpp4V6yECEVIkdEaKAk\",\n    \"access\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzIzNDM4MTM3LCJpYXQiOjE3MjM0MzcyMzcsImp0aSI6IjFjNjBkNmViMGM5NTQ2OTFhYWQ3YTZkNmRlMWY5MDFhIiwidXNlcl9pZCI6OH0.7pN_XddTecqop2sQhOMqPZoHOimgA69f6C5gP98FrTo\"\n}"
+				},
+				{
+					"name": "login-error",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"phone\": \"09123456789\",\n  \"password\": \"test@12\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local_url}}/api/auth/jwt/login/",
+							"host": [
+								"{{local_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"jwt",
+								"login",
+								""
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "JSON",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 12 Aug 2024 04:45:11 GMT",
+							"type": "text"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.2",
+							"type": "text"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"type": "text"
+						},
+						{
+							"key": "WWW-Authenticate",
+							"value": "Bearer realm=\"api\"",
+							"type": "text"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, origin",
+							"type": "text"
+						},
+						{
+							"key": "Allow",
+							"value": "POST, OPTIONS",
+							"type": "text"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY",
+							"type": "text"
+						},
+						{
+							"key": "Content-Length",
+							"value": "75",
+							"type": "text"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff",
+							"type": "text"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin",
+							"type": "text"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"No active account found with the given credentials\",\n    \"extra\": {}\n}"
+				},
+				{
+					"name": "login-throttle",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"phone\": \"09123456789\",\n  \"password\": \"test@12\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local_url}}/api/auth/jwt/login/",
+							"host": [
+								"{{local_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"jwt",
+								"login",
+								""
+							]
+						}
+					},
+					"status": "Too Many Requests",
+					"code": 429,
+					"_postman_previewlanguage": "JSON",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 12 Aug 2024 04:45:55 GMT",
+							"type": "text"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.2",
+							"type": "text"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"type": "text"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, origin",
+							"type": "text"
+						},
+						{
+							"key": "Allow",
+							"value": "POST, OPTIONS",
+							"type": "text"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY",
+							"type": "text"
+						},
+						{
+							"key": "Content-Length",
+							"value": "47",
+							"type": "text"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff",
+							"type": "text"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin",
+							"type": "text"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Request was throttled.\",\n    \"extra\": {}\n}"
+				}
+			]
+		},
+		{
+			"name": "send-otp",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"phone\": \"09123456789\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local_url}}/api/users/send-otp/",
+					"host": [
+						"{{local_url}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"send-otp",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "send-otp-success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"phone\": \"09123456789\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local_url}}/api/users/send-otp/",
+							"host": [
+								"{{local_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"send-otp",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "JSON",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 12 Aug 2024 04:27:24 GMT",
+							"type": "text"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.2",
+							"type": "text"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"type": "text"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, origin",
+							"type": "text"
+						},
+						{
+							"key": "Allow",
+							"value": "POST, OPTIONS",
+							"type": "text"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY",
+							"type": "text"
+						},
+						{
+							"key": "Content-Length",
+							"value": "21",
+							"type": "text"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff",
+							"type": "text"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin",
+							"type": "text"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"otp_code\": \"257472\"\n}"
+				},
+				{
+					"name": "send-otp-throttle",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"phone\": \"09123456789\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local_url}}/api/users/send-otp/",
+							"host": [
+								"{{local_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"send-otp",
+								""
+							]
+						}
+					},
+					"status": "Too Many Requests",
+					"code": 429,
+					"_postman_previewlanguage": "JSON",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 12 Aug 2024 04:41:13 GMT",
+							"type": "text"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.2",
+							"type": "text"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"type": "text"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, origin",
+							"type": "text"
+						},
+						{
+							"key": "Allow",
+							"value": "POST, OPTIONS",
+							"type": "text"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY",
+							"type": "text"
+						},
+						{
+							"key": "Content-Length",
+							"value": "47",
+							"type": "text"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff",
+							"type": "text"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin",
+							"type": "text"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Request was throttled.\",\n    \"extra\": {}\n}"
+				}
+			]
+		},
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"phone\": \"09123456789\",\n  \"password\": \"test@123\",\n  \"otp_code\": \"707002\",\n  \"first_name\": \"user\",\n  \"last_name\": \"test\",\n  \"email\": \"user.test@email.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local_url}}/api/users/register/",
+					"host": [
+						"{{local_url}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"register",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "register-error",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"phone\": \"09123456789\",\n  \"password\": \"test@123\",\n  \"otp_code\": \"257472\",\n  \"first_name\": \"user\",\n  \"last_name\": \"test\",\n  \"email\": \"user@email.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local_url}}/api/users/register/",
+							"host": [
+								"{{local_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"register",
+								""
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "JSON",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 12 Aug 2024 04:31:16 GMT",
+							"type": "text"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.2",
+							"type": "text"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"type": "text"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, origin",
+							"type": "text"
+						},
+						{
+							"key": "Allow",
+							"value": "POST, OPTIONS",
+							"type": "text"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY",
+							"type": "text"
+						},
+						{
+							"key": "Content-Length",
+							"value": "85",
+							"type": "text"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff",
+							"type": "text"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin",
+							"type": "text"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Validation error\",\n    \"extra\": {\n        \"fields\": {\n            \"email\": [\n                \"Email already exists.\"\n            ]\n        }\n    }\n}"
+				},
+				{
+					"name": "register-success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"phone\": \"09123456789\",\n  \"password\": \"test@123\",\n  \"otp_code\": \"707002\",\n  \"first_name\": \"user\",\n  \"last_name\": \"test\",\n  \"email\": \"user.test@email.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local_url}}/api/users/register/",
+							"host": [
+								"{{local_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"register",
+								""
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "JSON",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 12 Aug 2024 04:32:13 GMT",
+							"type": "text"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.2",
+							"type": "text"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"type": "text"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, origin",
+							"type": "text"
+						},
+						{
+							"key": "Allow",
+							"value": "POST, OPTIONS",
+							"type": "text"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY",
+							"type": "text"
+						},
+						{
+							"key": "Content-Length",
+							"value": "92",
+							"type": "text"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff",
+							"type": "text"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin",
+							"type": "text"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"phone\": \"09123456789\",\n    \"first_name\": \"user\",\n    \"last_name\": \"test\",\n    \"email\": \"user.test@email.com\"\n}"
+				},
+				{
+					"name": "register-throttle",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"phone\": \"09123456788\",\n  \"password\": \"test@123\",\n  \"otp_code\": \"707002\",\n  \"first_name\": \"user\",\n  \"last_name\": \"test\",\n  \"email\": \"usertest@email.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local_url}}/api/users/register/",
+							"host": [
+								"{{local_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"register",
+								""
+							]
+						}
+					},
+					"status": "Too Many Requests",
+					"code": 429,
+					"_postman_previewlanguage": "JSON",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 12 Aug 2024 04:42:28 GMT",
+							"type": "text"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.2",
+							"type": "text"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"type": "text"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, origin",
+							"type": "text"
+						},
+						{
+							"key": "Allow",
+							"value": "POST, OPTIONS",
+							"type": "text"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY",
+							"type": "text"
+						},
+						{
+							"key": "Content-Length",
+							"value": "47",
+							"type": "text"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff",
+							"type": "text"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin",
+							"type": "text"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Request was throttled.\",\n    \"extra\": {}\n}"
+				}
+			]
+		},
+		{
+			"name": "refresh",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"refresh\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcyMzUyMzYzNywiaWF0IjoxNzIzNDM3MjM3LCJqdGkiOiI0NmMwNmM4YjkwNzk0NTc3OTFkYjU1YzZmYzQzOWJjMSIsInVzZXJfaWQiOjh9.7QLIe3Y_wT1vh7xTKFZZ1sInQpp4V6yECEVIkdEaKAk\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local_url}}/api/auth/jwt/refresh/",
+					"host": [
+						"{{local_url}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"jwt",
+						"refresh",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "refresh-success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"refresh\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcyMzUyMzYzNywiaWF0IjoxNzIzNDM3MjM3LCJqdGkiOiI0NmMwNmM4YjkwNzk0NTc3OTFkYjU1YzZmYzQzOWJjMSIsInVzZXJfaWQiOjh9.7QLIe3Y_wT1vh7xTKFZZ1sInQpp4V6yECEVIkdEaKAk\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local_url}}/api/auth/jwt/refresh/",
+							"host": [
+								"{{local_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"jwt",
+								"refresh",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "JSON",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 12 Aug 2024 04:37:31 GMT",
+							"type": "text"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.2",
+							"type": "text"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"type": "text"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, origin",
+							"type": "text"
+						},
+						{
+							"key": "Allow",
+							"value": "POST, OPTIONS",
+							"type": "text"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY",
+							"type": "text"
+						},
+						{
+							"key": "Content-Length",
+							"value": "483",
+							"type": "text"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff",
+							"type": "text"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin",
+							"type": "text"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"access\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzIzNDM4MzUxLCJpYXQiOjE3MjM0MzcyMzcsImp0aSI6ImUwOTQ4OGQxZTRiMTQwMjNiNGRjZDI1YWJhZGJlNzFhIiwidXNlcl9pZCI6OH0.reDEb-ztiX1vlxv8uQhu107xp__KA9gNUmPOMLfX8lQ\",\n    \"refresh\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcyMzUyMzg1MSwiaWF0IjoxNzIzNDM3NDUxLCJqdGkiOiJlYTE2NjcxZTZhMjA0OGI0YjUzM2ZiYzFmM2M4NjQyNCIsInVzZXJfaWQiOjh9.EBeiIIseyuMeipFP3-I6Xj644kYEf9xPVwmzyLtvMHE\"\n}"
+				}
+			]
+		},
+		{
+			"name": "verify",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzIzNDM4MzUxLCJpYXQiOjE3MjM0MzcyMzcsImp0aSI6ImUwOTQ4OGQxZTRiMTQwMjNiNGRjZDI1YWJhZGJlNzFhIiwidXNlcl9pZCI6OH0.reDEb-ztiX1vlxv8uQhu107xp__KA9gNUmPOMLfX8lQ\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local_url}}/api/auth/jwt/verify/",
+					"host": [
+						"{{local_url}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"jwt",
+						"verify",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "verify-success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzIzNDM4MzUxLCJpYXQiOjE3MjM0MzcyMzcsImp0aSI6ImUwOTQ4OGQxZTRiMTQwMjNiNGRjZDI1YWJhZGJlNzFhIiwidXNlcl9pZCI6OH0.reDEb-ztiX1vlxv8uQhu107xp__KA9gNUmPOMLfX8lQ\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local_url}}/api/auth/jwt/verify/",
+							"host": [
+								"{{local_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"jwt",
+								"verify",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "JSON",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 12 Aug 2024 04:40:04 GMT",
+							"type": "text"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.2",
+							"type": "text"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"type": "text"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, origin",
+							"type": "text"
+						},
+						{
+							"key": "Allow",
+							"value": "POST, OPTIONS",
+							"type": "text"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY",
+							"type": "text"
+						},
+						{
+							"key": "Content-Length",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff",
+							"type": "text"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin",
+							"type": "text"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{}"
+				}
+			]
+		},
+		{
+			"name": "profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzIzNDM4MzUxLCJpYXQiOjE3MjM0MzcyMzcsImp0aSI6ImUwOTQ4OGQxZTRiMTQwMjNiNGRjZDI1YWJhZGJlNzFhIiwidXNlcl9pZCI6OH0.reDEb-ztiX1vlxv8uQhu107xp__KA9gNUmPOMLfX8lQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local_url}}/api/users/profile/",
+					"host": [
+						"{{local_url}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"profile",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "profile-error",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local_url}}/api/users/profile/",
+							"host": [
+								"{{local_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"profile",
+								""
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "JSON",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 12 Aug 2024 04:48:26 GMT",
+							"type": "text"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.2",
+							"type": "text"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"type": "text"
+						},
+						{
+							"key": "WWW-Authenticate",
+							"value": "Bearer realm=\"api\"",
+							"type": "text"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, origin",
+							"type": "text"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, HEAD, OPTIONS",
+							"type": "text"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY",
+							"type": "text"
+						},
+						{
+							"key": "Content-Length",
+							"value": "70",
+							"type": "text"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff",
+							"type": "text"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin",
+							"type": "text"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Authentication credentials were not provided.\",\n    \"extra\": {}\n}"
+				},
+				{
+					"name": "profile-success",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local_url}}/api/users/profile/",
+							"host": [
+								"{{local_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"profile",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "JSON",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 12 Aug 2024 04:49:56 GMT",
+							"type": "text"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.2",
+							"type": "text"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"type": "text"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, origin",
+							"type": "text"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, HEAD, OPTIONS",
+							"type": "text"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY",
+							"type": "text"
+						},
+						{
+							"key": "Content-Length",
+							"value": "70",
+							"type": "text"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff",
+							"type": "text"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin",
+							"type": "text"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"first_name\": \"user\",\n    \"last_name\": \"test\",\n    \"email\": \"user.test@email.com\"\n}"
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "local_url",
+			"value": "http://127.0.0.1:8000",
+			"type": "string"
+		}
+	]
+}
