@@ -48,7 +48,6 @@ class BaseUser(BaseModel, AbstractBaseUser, PermissionsMixin):
         unique=True,
         verbose_name=_("phone number"),
     )
-    phone_verified = models.BooleanField(default=False, verbose_name=_("phone verified"))
 
     is_active = models.BooleanField(default=True, verbose_name=_("active"))
     is_admin = models.BooleanField(default=False, verbose_name=_("admin"))
