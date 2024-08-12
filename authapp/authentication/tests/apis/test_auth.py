@@ -1,8 +1,25 @@
 from unittest.mock import patch
 
 import pytest
+from django.contrib.auth import get_user_model
 from django.urls import reverse
 from rest_framework import status
+from rest_framework.test import APIClient
+
+User = get_user_model()
+
+
+@pytest.fixture
+def api_client():
+    return APIClient()
+
+
+@pytest.fixture
+def create_user(db):
+    def make_user(**kwargs):
+        return User.objects.create_user(**kwargs)
+
+    return make_user
 
 
 @pytest.mark.django_db
