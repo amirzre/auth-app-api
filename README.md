@@ -22,6 +22,8 @@
 
 This project is an authentication and user registration system designed for a web or mobile application. The system allows users to log in if they are already registered or to sign up if they are new users. It integrates phone number-based authentication, ensuring that users receive a verification code to validate their identity before creating an account. The flow ensures a seamless experience by guiding users through the necessary steps based on their registration status.
 
+- Project address on github: https://github.com/amirzre/auth-app-api
+
 
 ## Features
 
